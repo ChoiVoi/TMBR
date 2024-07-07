@@ -1,0 +1,59 @@
+@page "{currentPage:int?}"
+@model RazorLoginRegister.Pages.ExpenditureDetailsModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Expenditure Details";
+}
+
+<h2>Expenditure Details</h2>
+
+<div class="text-center">
+    <form method="get" asp-page="AddExpenditure">
+        <button type="submit" class="btn btn-primary">Add Expenditure</button>
+    </form>
+    <form method="get" action="/MoneyFlow">
+        <button type="submit" class="btn btn-secondary">Back to Money Flow</button>
+    </form>
+</div>
+
+
+<h3 class="text-center">Total Expenditure: $@Model.TotalExpenditure</h3>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var expenditure in Model.Expenditures)
+            {
+                <tr>
+                    <td>$@expenditure.Amount</td>
+                    <td>@expenditure.Description</td>
+                    <td>@expenditure.Date.ToShortDateString()</td>
+                    <td>
+                        <form method="get" asp-page="EditExpenditure" asp-route-id="@expenditure.Id" style="display:inline;">
+                            <button type="submit" class="btn btn-warning">Edit</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                <a class="page-link" asp-page="./ExpenditureDetails" asp-route-currentPage="@i">@i</a>
+            </li>
+        }
+    </ul>
+</nav>

@@ -1,0 +1,27 @@
+@page
+@model RazorLoginRegister.Pages.MoneyFlowModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Money Flow";
+}
+
+<h2>Money Flow</h2>
+
+<div class="summary">
+    <div class="summary-item">
+        <h3>Total Income: @Model.TotalIncome</h3>
+        <form method="get" asp-page="IncomeDetails">
+            <button type="submit" class="btn btn-primary">View Income Details</button>
+        </form>
+    </div>
+    <div class="summary-item">
+        <h3>Total Expenditure: @Model.TotalExpenditure</h3>
+        <form method="get" asp-page="ExpenditureDetails">
+            <button type="submit" class="btn btn-primary">View Expenditure Details</button>
+        </form>
+    </div>
+</div>
+
+<form method="post" asp-page-handler="Logout">
+    <button type="submit" class="btn btn-primary">Logout</button>
+</form>

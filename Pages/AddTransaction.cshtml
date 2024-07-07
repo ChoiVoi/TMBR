@@ -1,0 +1,35 @@
+@page
+@model RazorLoginRegister.Pages.AddTransactionModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Add Transaction";
+}
+
+<h2>Add Transaction</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Input.Amount"></label>
+        <input asp-for="Input.Amount" class="form-control" />
+        <span asp-validation-for="Input.Amount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.Description"></label>
+        <input asp-for="Input.Description" class="form-control" />
+        <span asp-validation-for="Input.Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.Type"></label>
+        <select asp-for="Input.Type" class="form-control">
+            <option value="Income">Income</option>
+            <option value="Expenditure">Expenditure</option>
+        </select>
+        <span asp-validation-for="Input.Type" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="/MoneyFlow" class="btn btn-secondary">Back</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
